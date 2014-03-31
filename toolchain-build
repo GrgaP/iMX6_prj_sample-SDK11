@@ -1,0 +1,20 @@
+Download latest binutils,gcc,gdb,newlib
+from
+http://ftp.gnu.org/gnu/binutils/
+http://ftp.gnu.org/gnu/gcc/
+http://ftp.gnu.org/gnu/gdb/
+ftp://sources.redhat.com/pub/newlib/
+
+
+
+build binutils
+../../binutils-2.24/configure --target=arm-none-eabi --prefix=/home/src/arm/target --enable-interwork --enable-multilib
+build gcc
+go to gcc-source-directeroy and run ".contrib/download_prerequisites"
+../../gcc-4.8.2/configure --target=arm-none-eabi --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --enable-languages="c,c++" --with-newlib --with-headers=../../newlib-2.1.0/newlib/libc/include/ --disable-nls --disable-libssp
+if it fails with "checking dynamic linker characteristics... configure: error: Link tests are not allowed after GCC_NO_EXECUTABLES." try adding "--with-system-zlib" to configure.
+build newlib
+../../newlib-2.1.0/configure --target=arm-none-eabi --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib
+Should you encounter "`makeinfo' is missing on your system", install texinfo-package
+finish gcc-build
+build gdb
