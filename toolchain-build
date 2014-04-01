@@ -5,25 +5,39 @@ http://ftp.gnu.org/gnu/gcc/
 http://ftp.gnu.org/gnu/gdb/
 ftp://sources.redhat.com/pub/newlib/
 
+Configure needs to be done in seperate directories seperate from the source!
+
+sample structure:
+arm/gcc
+
+build binutils:
+£ ../../binutils-2.24/configure --target=arm-none-eabi --prefix=/home/src/arm/target --enable-interwork --enable-multilib --disable-nls --disable-libssp
+£ make all install
 
 
-build binutils
-../../binutils-2.24/configure --target=arm-none-eabi --prefix=/home/src/arm/target --enable-interwork --enable-multilib --disable-nls --disable-libssp
-make all install
-
-build gcc
+build gcc:
 go to gcc-source-directeroy and run ".contrib/download_prerequisites"
-../../gcc-4.8.2/configure --target=arm-none-eabi --host=x86_64-unknown-linux-gnu --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --enable-languages="c,c++" --with-newlib --with-headers=../../newlib-2.1.0/newlib/libc/include/ --disable-nls --disable-libssp
-make all-gcc install-gcc
+£ ../../gcc-4.8.2/configure --target=arm-none-eabi --host=x86_64-unknown-linux-gnu --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --enable-languages="c,c++" --with-newlib --with-headers=../../newlib-2.1.0/newlib/libc/include/ --disable-nls --disable-libssp
+
+£ make all-gcc install-gcc
+
+If that fails looking for "mpc.h" add a "--with-headers" to the target arm-none-eabi/sys-include/ -dir:
+£ ../../gcc-4.8.2/configure --host=x86_64-unknown-linux-gnu --target=arm-none-eabi --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --enable-languages="c,c++" --with-newlib --with-headers=../../newlib-2.1.0/newlib/libc/include/ --with-headers=../../target/arm-none-eabi/sys-include/
 if it fails with "checking dynamic linker characteristics... configure: error: Link tests are not allowed after GCC_NO_EXECUTABLES." try adding "--with-system-zlib" to configure.
 
-build newlib
-../../newlib-2.1.0/configure --target=arm-none-eabi --host=arm-none-eabi --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --disable-libssp --disable-nls
+
+build newlib:
+£ ../../newlib-2.1.0/configure --build=x86_64-unknown-linux-gnu --host=arm-none-eabi --target=arm-none-eabi --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --disable-libssp --disable-nls
+£ make all install
+
 Should you encounter "`makeinfo' is missing on your system", install texinfo-package
+
 The makefile doesn't treat all build-</target-/source-directory combinations right; In that case: make sure the build-dir has name that is different from the source dir and create a symlink to the source dir in the directory in which the build-dir is lying.
-in the directory
 
-finish gcc-build
-make all-gcc install-gcc
 
-build gdb
+finish gcc-build:
+go back to the gcc-build-dir
+£ make all install
+
+build gdb:
+
