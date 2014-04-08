@@ -1,0 +1,23 @@
+dip:
+1 BOOT_MODE1
+2 BOOT_MODE0
+3 BT_CFG1_6 / EIM_DA6
+4 BT_CFG1_5 / EIM_DA5
+5 BT_CFG2_6 / EIM_DA14
+6 BT_CFG2_5 / EIM_DA13
+7 BT_CFG2_4 / EIM_DA12
+8 BT_CFG2_3 / EIM_DA11
+
+BOOT_CFG1[6:5]	| Boot Device
+00							| Reserved
+01							| Serial ROM (I2C/SPI)
+10              | SD/eSD/SDXC
+
+usb-boot:
+downloaded image must continue to service 32-second-watchdog timer.
+
+internal-boot:
+
+
+internal ROM mem-map:
+IMX6SDLRM.pdf Seite 393

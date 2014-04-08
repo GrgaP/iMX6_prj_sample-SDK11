@@ -1,0 +1,1 @@
+-IiMX6_Platform_SDK/sdk/include/ -IiMX6_Platform_SDK/sdk/include/mx6sdl/ -IiMX6_Platform_SDK/board/mx6sdl/evb/ -IiMX6_Platform_SDK/sdk/ -IiMX6_Platform_SDK/sdk/drivers/ -IiMX6_Platform_SDK/sdk/core/ -IiMX6_Platform_SDK/sdk/common/ -IiMX6_Platform_SDK/board/common/
