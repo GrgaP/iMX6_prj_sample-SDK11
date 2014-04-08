@@ -1,4 +1,6 @@
-dip:
+from dIMX6SDLRM.pdf
+
+ip:
 1 BOOT_MODE1
 2 BOOT_MODE0
 3 BT_CFG1_6 / EIM_DA6
@@ -13,11 +15,55 @@ BOOT_CFG1[6:5]	| Boot Device
 01							| Serial ROM (I2C/SPI)
 10              | SD/eSD/SDXC
 
+possible side-effects tables on muxing-scheme (and OneNAND - which is not used?) p. 398f
+
+from p. 414ff:
+Fuse						|	Definition 	| GPIO1	| Shipped Value	| Settings
+BOOT_CFG1[6]		|	Boot Device	|	Yes		| 0							| 1 - Boot from USDHC Interfaces
+									Selection
+BOOT_CFG1[5]		| SD/MMC-			| Yes		|	0							| 0 - SD/eSD/SDXC
+									Selection															1 - MMC/eMMC
+BOOT_CFG2[4:3]	| Port Select	| Yes		| 00 						|	00 - USDHC-1
+																												01 - USDHC-2
+																												10 - USDHC-3	
+																												11 - USDHC-4
+BOOT_CFG2[6:5]	| Bus Width/SD| Yes	| 000	| SD/eSD/SDXC (BOOT_CFG1[5]=0)
+									Calibration Step												Bus Width
+																													x0 - 1-bit
+																													x1 - 4-bit
+																													SD Calibration Step
+																													0x - 1 delay cells
+																													1x - 1 delay cells
+																													MMC/eMMC (BOOT_CFG1[5]=1)
+																													00 - 1-bit
+																													01 - 4-bit
+																													10 - 8-bit
+
+
 usb-boot:
+DIP[1:8] = 01110111
 downloaded image must continue to service 32-second-watchdog timer.
+p.441
 
 internal-boot:
+"MMC/SD/eSD/SDXC/eMMC can be connected to any of USDHC-1,2,3,4 blocks and can
+be booted by copying 4Kbyte of data from MMC/SD/eSD/eMMC device to internal
+RAM. After checking the Image Vector Table header value (0xD1) from Program Image,
+the ROM code performs a DCD check. After successful DCD extraction, the ROM code
+extracts from Boot Data Structure the destination pointer and length of image to be
+copied to RAM device from where code execution occurs." p.416
+"The boot ROM code reads application image length and
+application destination pointer from image."
 
+
+	eMMC:
+DIP[1:8] = 10110111
+	SD:
+DIP[1:8] = 10100101
 
 internal ROM mem-map:
-IMX6SDLRM.pdf Seite 393
+p. 393
+
+Image Vector Table:
+This is meta-data that is copied on boot. It contains information such as pointers to instructions
+p. 434
