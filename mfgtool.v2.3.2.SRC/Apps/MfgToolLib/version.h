@@ -1,0 +1,14 @@
+/*
+ * Copyright (C) 2009-2013, Freescale Semiconductor, Inc. All Rights Reserved.
+ * THIS SOURCE CODE IS CONFIDENTIAL AND PROPRIETARY AND MAY NOT
+ * BE USED OR DISTRIBUTED WITHOUT THE WRITTEN PERMISSION OF
+ * Freescale Semiconductor, Inc.
+ *
+ */
+
+#define FSLMFGTOOL_MAJOR_VERSION	2
+#define FSLMFGTOOL_MINOR_VERSION	3
+#define FSLMFGTOOL_REVISION			2
+#define MFGTOOL_STRING_VERSION		"2.3.2"
+
+

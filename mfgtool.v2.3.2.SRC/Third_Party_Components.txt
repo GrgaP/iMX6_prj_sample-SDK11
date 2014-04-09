@@ -1,0 +1,4 @@
+Package                                 License                                     Code Download URL                                    Modified?   
+---------------                         -------                                     --------------------------                           ------------
+Apps/Mfgtoollib/XMLite.cpp/h            The Code Project Open License (CPOL)        http://www.codeproject.com/KB/recipes/xmlite.aspx    Yes
+

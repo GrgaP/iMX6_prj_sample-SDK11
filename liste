@@ -27,7 +27,7 @@ BOOT_CFG2[4:3]	| Port Select	| Yes		| 00 						|	00 - USDHC-1
 																												01 - USDHC-2
 																												10 - USDHC-3	
 																												11 - USDHC-4
-BOOT_CFG2[6:5]	| Bus Width/SD| Yes	| 000	| SD/eSD/SDXC (BOOT_CFG1[5]=0)
+BOOT_CFG2[6:5]	| Bus Width/SD| Yes		| 000						| SD/eSD/SDXC (BOOT_CFG1[5]=0)
 									Calibration Step												Bus Width
 																													x0 - 1-bit
 																													x1 - 4-bit
@@ -40,10 +40,11 @@ BOOT_CFG2[6:5]	| Bus Width/SD| Yes	| 000	| SD/eSD/SDXC (BOOT_CFG1[5]=0)
 																													10 - 8-bit
 
 
-usb-boot:
+usb-boot (serial download):
 DIP[1:8] = 01110111
 downloaded image must continue to service 32-second-watchdog timer.
 p.441
+over USB-OTG (not USB-PHY/OpenSDA)
 
 internal-boot:
 "MMC/SD/eSD/SDXC/eMMC can be connected to any of USDHC-1,2,3,4 blocks and can
