@@ -132,4 +132,5 @@ SECTIONS
     . += 128M;
     free_memory_end = .;
     _end = .;
+    PROVIDE(end = .);
 }

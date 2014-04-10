@@ -5,19 +5,19 @@ http://ftp.gnu.org/gnu/gcc/
 http://ftp.gnu.org/gnu/gdb/
 ftp://sources.redhat.com/pub/newlib/
 
-Configure needs to be done in seperate directories seperate from the source!
+Configure needs to be run from directories seperate from the source!
 
-sample structure:
-arm/gcc
 
 build binutils:
-£ ../../binutils-2.24/configure --target=arm-none-eabi --prefix=/home/src/arm/target --enable-interwork --enable-multilib --disable-nls --disable-libssp
+£ ../../binutils-2.24/configure --target=arm-none-eabi --prefix=/home/src/arm/target --enable-interwork --enable-multilib --disable-nls --disable-libssp --with-lib-path=/home/src/arm/target/lib/
+
 £ make all install
 
 
 build gcc:
 go to gcc-source-directeroy and run ".contrib/download_prerequisites"
-£ ../../gcc-4.8.2/configure --target=arm-none-eabi --host=x86_64-unknown-linux-gnu --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --enable-languages="c,c++" --with-newlib --with-headers=../../newlib-2.1.0/newlib/libc/include/ --disable-nls --disable-libssp
+£ ../../gcc-4.8.2/configure --target=arm-none-eabi --host=x86_64-unknown-linux-gnu --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --enable-languages="c,c++" --with-newlib --with-headers=../../newlib-2.1.0/newlib/libc/include/ --disable-nls --disable-libssp --with-system-zlib
+
 
 £ make all-gcc install-gcc
 
@@ -27,12 +27,27 @@ if it fails with "checking dynamic linker characteristics... configure: error: L
 
 
 build newlib:
-£ ../../newlib-2.1.0/configure --build=x86_64-unknown-linux-gnu --host=arm-none-eabi --target=arm-none-eabi --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --disable-libssp --disable-nls
+£ export PATH="$PATH:/home/src/arm/target/bin"
+£ ../../newlib-2.1.0/configure --build=x86_64-unknown-linux-gnu --host=arm-none-eabi --target=arm-none-eabi --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --disable-libssp --disable-nls --with-newlib
 £ make all install
 
 Should you encounter "`makeinfo' is missing on your system", install texinfo-package
 
 The makefile doesn't treat all build-</target-/source-directory combinations right; In that case: make sure the build-dir has name that is different from the source dir and create a symlink to the source dir in the directory in which the build-dir is lying.
+
+concerning binutils:
+if you dont want to have to enforce CFFLAGS with every build, do this/ or use /usr as prefix:
+£ ../../binutils-2.24/configure --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=arm-none-eabi --prefix=/home/src/arm/target/ --enable-interwork --enable-multilib --disable-libssp -disable-nls --with-lib-path=/home/src/arm/target/lib
+
+otherwise do as stated in this stackoverflow-quote:
+"If recompiling gcc is not an option because it is already installed with sysroot, then try this:
+`export CFLAGS="--sysroot=<your-gcc-sysroot>"`
+(hint: libc.so.x is in <your-gcc-sysroot>/lib)
+Then edit your makefile and replace any
+`CFLAGS=BLA-BLA`
+`CPPFLAGS=BLA-BLA`
+with
+CFLAGS+=BLA-BLA CPPFLAGS+=BLA-BLA"
 
 
 finish gcc-build:
@@ -40,4 +55,4 @@ go back to the gcc-build-dir
 £ make all install
 
 build gdb:
-
+nah, not yet important

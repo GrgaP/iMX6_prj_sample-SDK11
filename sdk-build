@@ -1,0 +1,10 @@
+first add "PROVIDE(end = .);" behind "_end = .;" at the end of apps/common/basic_sdk_app.ld.S.
+This will prevent linker errors.
+
+using the arm-none-eabi-toolchain:
+£ export PATH=$PATH:/home/src/arm/target/bin/
+£ export CROSS_COMPILE=arm-none-eabi-
+£ tools/build_sdk -t mx6sdl
+havent worked out the other parameters yet.
+
+

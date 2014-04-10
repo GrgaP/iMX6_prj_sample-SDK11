@@ -290,4 +290,6 @@ SECTIONS
     free_memory_end = .;
 
     _end = .;
+		
+    PROVIDE(end = .);
 }

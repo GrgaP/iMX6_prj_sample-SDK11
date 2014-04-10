@@ -96,7 +96,8 @@ all: $(sort $(ALL_APPS)) ;
 .PHONY: ALL_APPS
 $(ALL_APPS): $(SUBDIRS)
 	@$(call printmessage,build,Building, $@ ,gray,[$(TARGET) $(BOARD) $(BOARD_REVISION)],,\n)
-	@$(MAKE) $(silent_make) -r -C apps/$@
+	@$(MAKE) -r -C apps/$@ 
+# $(silent_make)
 
 # Print message before recursive into subdirs.
 $(SUBDIRS)::

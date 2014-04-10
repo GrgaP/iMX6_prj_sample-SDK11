@@ -33,8 +33,8 @@ BOOT_CFG2[6:5]	| Bus Width/SD| Yes		| 000						| SD/eSD/SDXC (BOOT_CFG1[5]=0)
 																													x1 - 4-bit
 																													SD Calibration Step
 																													0x - 1 delay cells
-																													1x - 1 delay cells
-																													MMC/eMMC (BOOT_CFG1[5]=1)
+																													0x - 1 delay cells
+																												MMC/eMMC (BOOT_CFG1[5]=1)
 																													00 - 1-bit
 																													01 - 4-bit
 																													10 - 8-bit
