@@ -57,10 +57,12 @@ copied to RAM device from where code execution occurs." p.416
 application destination pointer from image."
 
 
-	eMMC:
-DIP[1:8] = 10110111
 	SD:
 DIP[1:8] = 10100101
+	µSD:
+DIP[1:8] = 10100110
+	eMMC:
+DIP[1:8] = 10110111
 
 internal ROM mem-map:
 p. 393

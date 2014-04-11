@@ -1,0 +1,51 @@
+U-Boot 2009.08-00695-g055df3a (Dec 25 2013 - 09:56:12)
+
+CPU: Freescale i.MX6 family TO1.1 at 792 MHz
+Thermal sensor with ratio = 186
+Temperature:   28 C, calibration data 0x59751d5f
+mx6q pll1: 792MHz
+mx6q pll2: 528MHz
+mx6q pll3: 480MHz
+mx6q pll8: 50MHz
+ipg clock     : 66000000Hz
+ipg per clock : 66000000Hz
+uart clock    : 80000000Hz
+cspi clock    : 60000000Hz
+ahb clock     : 132000000Hz
+axi clock   : 198000000Hz
+emi_slow clock: 99000000Hz
+ddr clock     : 396000000Hz
+usdhc1 clock  : 198000000Hz
+usdhc2 clock  : 198000000Hz
+usdhc3 clock  : 198000000Hz
+usdhc4 clock  : 198000000Hz
+nfc clock     : 24000000Hz
+Board: i.MX6DL/Solo-SABRESD: unknown-board Board: 0x61011 [POR ]
+Boot Device: MMC
+I2C:   ready
+DRAM:   1 GB
+MMC:   FSL_USDHC: 0,FSL_USDHC: 1,FSL_USDHC: 2,FSL_USDHC: 3
+*** Warning - bad CRC or MMC, using default environment
+
+In:    serial
+Out:   serial
+Err:   serial
+Net:   got MAC address from IIM: 00:00:00:00:00:00
+----enet_board_init: phy reset
+FEC0 [PRIME]
+Hit any key to stop autoboot:  0 
+mmc3(part 0) is current device
+
+MMC read: dev # 3, block # 2048, count 8192 ... 8192 blocks read: OK
+## Booting kernel from Legacy Image at 10800000 ...
+   Image Name:   Linux-3.0.35-02871-ga35ffe3
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    3901664 Bytes =  3.7 MB
+   Load Address: 10008000
+   Entry Point:  10008000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+OK
+  
+Starting kernel ...
+

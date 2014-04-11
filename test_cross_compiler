@@ -1,0 +1,26 @@
+with a linux running on the riotboard you can test the previously built toolchain by:
+
+on your computer:
+generating an object file for add.c with these contents:
+-------------------------------------------------------------------------------
+int add(int a, int b) {
+        return a + b*3;
+}
+-------------------------------------------------------------------------------
+
+£ gcc -c add.c
+
+on the riotboard:
+fetch the add.o per sd-card or eth:
+£ ssh leon@10.42.0.89:/tmp/add.o .
+compile main.c:
+-------------------------------------------------------------------------------
+#include <stdio.h>
+int main(int argc, char * argv[]) {
+        int res = add(1,2);
+        printf("Yo: %dha!\n", res);
+        return 0;
+}
+-------------------------------------------------------------------------------
+£ gcc add.o main.c
+£ !profit!
