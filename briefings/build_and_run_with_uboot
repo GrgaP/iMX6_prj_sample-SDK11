@@ -1,0 +1,64 @@
+clone u-boot:
+£ git clone git://github.com/embest-tech/u-boot-imx.git -b embest_imx_3.0.35_4.0.0
+
+set envvars, these are mine:
+£ export CROSS_COMPILE=arm-none-eabi- ; export PATH=/home/src/arm/target/bin/:$PATH
+
+£ make mx6solo_RIoTboard_config
+£ make all
+
+create a partition on your sd-card, but leave space for the u-boot image!
+quick walkthrough using fdisk:
+-------------------------------------------------------------------------------
+£ fdisk /dev/mmcblk0
+press o
+press n
+press [enter] for primary
+press [enter] for 1
+type 8192[enter] and hope that u-boot is not too big. (it really shouldn't)
+press [enter] to make the partition use the remaining space
+press w
+now you should be able to mount /dev/mmcblk0p1
+-------------------------------------------------------------------------------)
+
+£ dd if=/home/leon/git/u-boot-imx-flavor/u-boot.bin of=/dev/mmcblk0 seek=2 skip=2 bs=512
+£ sync
+
+
+Program:
+This is the code that runs, when "go" is entered at u-boot-prompt:
+
+__attribute__((weak))
+unsigned long do_go_exec (ulong (*entry)(int, char *[]), int argc, char *argv[])
+{
+  return entry (argc, argv);
+}
+// u-boot-imx/common/cmd_boot.c
+
+So the first parameter to "go" should be a pointer to a c-style function.
+
+Consider this simple program main.c:
+
+int main(int argc, char * argv[]) {
+  return 0x1212;
+}
+
+// At this point we don't know/ have standard-library of u-boot/ in our application
+
+compile, but not link:
+£ arm-none-eabi-gcc -c main.c
+then link:
+£ arm-none-eabi-ld main.o
+ld tells you the offset of the actual progamm. for me it was 0x8000
+£ mv a.out main
+
+put main on the sd-card
+safely eject the sd-card and put it in the riotboard.
+while the able to debug via UART (see connect_debug) power on.
+You should now be in a screen-session
+press a key to interrupt autoboot
+
+then load the file:
+£ fatload mmc 1 0x10000000 main
+and run!
+£ go 0x10008000
