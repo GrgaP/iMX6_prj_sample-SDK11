@@ -1,0 +1,9 @@
+connect the RXD, TXD and GNG to the three pins next to eth.
+
+the pin next to the screw is GND.
+the pin in the middle is TXD
+the pin towards USB_OTG is RXD
+
+on openSUSE add your user to the "dialout"-group or create a udev-rule to change permission and run:
+£ screen /dev/ttyUSB0 115200
+(or just be root)

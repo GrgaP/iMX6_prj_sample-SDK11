@@ -1,5 +1,8 @@
 checkout u-boot (11.4.2014)
 
+£ export CROSS_COMPILE=arm-none-eabi-
+also, PATH
+
 make sure arm-none-eabi toolchain is in your PATH
 £ make mx6solo_RIoTboard_config
 £ make all
