@@ -52,23 +52,26 @@ Subtasks:
 Initial directions:
 -------------------
 
-[get familiar with the board]
+[get familiar with the board]                                   DONE
 
-- find documents, create and fill wiki
-- find flashing tools
-- try it with Android/Linux
-- check out bootloader(s)
+- find documents, create and fill wiki                          DONE
+- find flashing tools                                           DONE
+- try it with Android/Linux                                     DONE
+- check out bootloader(s)                                       DONE
 
-[find out what needs to be done for a port]
+[find out what needs to be done for a port]                    (DONE)
 
-- ask Hauke and let him explain ;)
+- ask Hauke and let him explain ;)                             (DONE)
 
-[port it!]
+[port it!]                                                      15.07.
 
-- learn about ARM architecture
-- learn about ARM assembler
-- learn about Makefiles
-- download cross compiler from Sourcery
-- update folder structure and Makefiles in RIOT project
-- get stuff to work
+- learn about ARM architecture                                  TODO
+- learn about ARM assembler                                     TODO
+- learn about Makefiles                                         TODO
+- download cross compiler from Sourcery                         DONE
+- update folder structure and Makefiles in RIOT project         TODO
+- make UART I/O work                                            31.05.
+- make timers work                                              31.05.
+- write a board_init() for the RIoTboard                        31.05.
+- write a kernel_init() for the RIoTboard                       30.06.
 
