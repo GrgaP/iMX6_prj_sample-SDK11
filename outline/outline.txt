@@ -1,0 +1,74 @@
+
+Porting RIOT-OS to a new hardware platform
+
+ARM Cortex A9 on the RIoTboard
+
+==========================================
+
+Contextof the topic:
+--------------------
+
+- existing OS
+- code should be hardware-independent
+- most of it is
+- some parts *have* to be hardware-specific
+- i.e. booting, context-switch, drivers, etc.
+- we can haz RIoTboard
+- suitable for IoT, but still quite powerful
+
+
+Problems to be solved:
+----------------------
+
+- get familiar with the board
+- find out what needs to be done for a port
+- port it!
+
+
+Subtasks:
+---------
+
+[get familiar with the board]
+
+- boot it, read manuals and documentation
+- try features with existing OS that supports it
+- be able to flash it
+- be able to actually run bare-metal code
+
+[find out what needs to be done for a port]
+
+- identify hardware-specific parts of the OS
+- identify essential parts necessary to run the OS
+
+[port it!]
+
+- understand target architecture
+- get a cross compiler
+- rewrite parts for target platform
+- successfully build
+- debug
+
+
+Initial directions:
+-------------------
+
+[get familiar with the board]
+
+- find documents, create and fill wiki
+- find flashing tools
+- try it with Android/Linux
+- check out bootloader(s)
+
+[find out what needs to be done for a port]
+
+- ask Hauke and let him explain ;)
+
+[port it!]
+
+- learn about ARM architecture
+- learn about ARM assembler
+- learn about Makefiles
+- download cross compiler from Sourcery
+- update folder structure and Makefiles in RIOT project
+- get stuff to work
+
