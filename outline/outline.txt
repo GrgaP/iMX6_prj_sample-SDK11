@@ -5,7 +5,7 @@ ARM Cortex A9 on the RIoTboard
 
 ==========================================
 
-Contextof the topic:
+Context of the topic:
 --------------------
 
 - existing OS
