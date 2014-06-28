@@ -1,4 +1,4 @@
-TARGET?=seminar
+TARGET?=report
 LATEX_BUILD_CMD=pdflatex -interaction=nonstopmode
 
 default: build

@@ -10,34 +10,33 @@ ip:
 7 BT_CFG2_4 / EIM_DA12
 8 BT_CFG2_3 / EIM_DA11
 
-BOOT_CFG1[6:5]	| Boot Device
-00							| Reserved
-01							| Serial ROM (I2C/SPI)
-10              | SD/eSD/SDXC
 
 possible side-effects tables on muxing-scheme (and OneNAND - which is not used?) p. 398f
 
 from p. 414ff:
-Fuse						|	Definition 	| GPIO1	| Shipped Value	| Settings
-BOOT_CFG1[6]		|	Boot Device	|	Yes		| 0							| 1 - Boot from USDHC Interfaces
+Fuse						|	Definition	| Settings
+BOOT_MODE[1:0]	|	Boot Device	|	00 - Reserved
+															|	01 - Serial ROM (I2C/SPI)
+															|	10 - SD/eSD/SDXC
+BOOT_CFG1[6]		|	Boot Device	|	1 - Boot from USDHC Interfaces
 									Selection
-BOOT_CFG1[5]		| SD/MMC-			| Yes		|	0							| 0 - SD/eSD/SDXC
-									Selection															1 - MMC/eMMC
-BOOT_CFG2[4:3]	| Port Select	| Yes		| 00 						|	00 - USDHC-1
-																												01 - USDHC-2
-																												10 - USDHC-3	
-																												11 - USDHC-4
-BOOT_CFG2[6:5]	| Bus Width/SD| Yes		| 000						| SD/eSD/SDXC (BOOT_CFG1[5]=0)
-									Calibration Step												Bus Width
-																													x0 - 1-bit
-																													x1 - 4-bit
-																													SD Calibration Step
-																													0x - 1 delay cells
-																													0x - 1 delay cells
-																												MMC/eMMC (BOOT_CFG1[5]=1)
-																													00 - 1-bit
-																													01 - 4-bit
-																													10 - 8-bit
+BOOT_CFG1[5]		| SD/MMC-			|	0 - SD/eSD/SDXC
+									Selection			1 - MMC/eMMC
+BOOT_CFG2[4:3]	| USDHC-Port	| 00 - USDHC-1
+									Select				01 - USDHC-2
+																10 - USDHC-3	
+																11 - USDHC-4
+BOOT_CFG2[6:5]	| Bus Width/SD|	SD/eSD/SDXC (BOOT_CFG1[5]=0)
+									Calibration Step		Bus Width
+																				x0 - 1-bit
+																				x1 - 4-bit
+																			SD Calibration Step
+																				0x - 1 delay cells
+																				1x - 1 delay cells
+																MMC/eMMC (BOOT_CFG1[5]=1)
+																				00 - 1-bit
+																				01 - 4-bit
+																				10 - 8-bit
 
 
 usb-boot (serial download):

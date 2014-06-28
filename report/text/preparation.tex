@@ -1,0 +1,64 @@
+\section{Preparing For The Port}
+
+In order to complete the project successfully, we agreed on these goals with the
+teaching-staff:
+
+\begin{itemize}
+\item The RIoT-OS-wiki has pages on working with the hardware
+\item RIoT-OS compiles for the RIoTboard
+\item Interfaces to timers, UART and interrupts is implemented
+\end{itemize}
+
+As we had no idea how hard it was going to be, we were very generous with the curfews
+for the different steps.
+
+\subsection{The Hardware}
+The RIoTboard is a rather unusual board for the RIoT-OS to run on.
+It is based on the "i.MX6Solo" freescale-architecture, has an ARM cortex-A9, many
+different interfaces and supposed to be used mainly by developers.
+
+
+\subsection{Software Running on the RIoTboard}
+On the boards website the manufacturer, embest-tech, offers binary-images and instructions
+for running android or ubuntu, of which android is installed by default. Both operating
+systems rely on u-boot to do low-level hardware-initialisation. The source-code of those
+ports is available in moderately-hard-to-find repositories on the internet and
+the code itself could somehow be re-useable.
+
+Due to their structure, the linux-code and the u-boot-fork were useful in different ways:
+u-boot requires the seperation of syscalls, the "flash-header" - which helped understand
+the way the i.MX6 boots and linker script.
+So with u-boot embest-tech provides three files for those and one giant source-file for
+all the rest.
+The linux-port seems better structured but due to us lacking the knowledge about
+the kernel it was harder to use any parts of the source..
+Also, as far as initialisation goes, linux seems to repeat some of the steps that have
+already been done by u-boot and does some differently.
+
+The focus on developers is somehow restricted to those two operating systems. There is no
+official support apart from discussions on a channel of an IoT/embedded-focused developer
+forum.
+
+\section{Running our own Software}
+
+The simplest thing we could get to run on the RIoTboard was u-boot: Either via the serial
+connection, where the freshly transferred u-boot and an initramfs could be used to
+receive files or binary that could then be stored on the board, or by writing the binary
+onto a SD-card. From within the running u-boot it was possible to execute a method from
+a cross-compiled object-file that simply returned an integer value.
+
+We were trying to figure out how to use u-boot for booting and supplying the standard
+library but all the files were spread all over the u-boot-source-directory.
+As we were realising how difficult it was going to be to not only have a functional
+binary based on our own code but also integrate the existing structure into the
+make-system of RIoT-OS, we didn't think we would be able to meet any goal beyond
+supplying a rudimentary framework so that coding can start in the RIoT-OS-codebase.
+
+Luckily, freescale supplies a SDK for the i.MX6-platform that is able to run on their
+reference-boards. We agreed with the teaching-staff to rather use the SDK because it is
+closer to just developing applications in a C-manner and the source-tree is
+well-structured without making it too hard to find a particular piece of code and also,
+there are hardly any source-files with irrelevant code.
+
+Then again, sadly, none of the targets for the SDK seemed to produce code that ran on the
+RIoTboard.

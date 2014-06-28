@@ -83,10 +83,10 @@ ifeq "$(VERBOSE)" "1"
 at :=
 silent_make :=
 else
-at := @
-silent_make := -s
-#at :=
-#silent_make :=
+#at := @
+#silent_make := -s
+at :=
+silent_make :=
 endif
 
 # These colors must be printed with the printf command. echo won't handle the
