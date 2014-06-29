@@ -1,0 +1,35 @@
+\section{Booting the i.MX6}
+
+While trying to find a simple way of flashing the ROM of the cortex-A9 we learned that
+freescale does not want anybody to flash the CPU directly. Instead there is a program on
+the ROM that checks hardware-signals called \textbf{FUSE}s to decide how the CPU boots.
+Essentially, they allow to boot from one of four \textit{USDHC}-block-devices or a
+serial-download-mode. In theory, \textbf{FUSE}s can be used to change other
+parameters for booting.
+
+In case of the RIoTboard the first three \textit{USDHC}-lines are 4 GB of internal eMMC,
+the SD- and the $\mu$SD-card-slot. The serial interface is wired to the mini-USB-port
+next to the ethernet-port and UART2-pins.
+Slightly more-detailed information can be found in the gitlab-repository mentioned in
+the introduction (\textit{$briefings/boot-switches\_and\_-modes$})
+
+\section{Running our own Software}
+
+The simplest thing we could get to run on the RIoTboard was u-boot: Either via the serial
+connection, where the freshly transferred u-boot and an initramfs could be used to
+receive files or binary that could then be stored on the board, or by writing the binary
+onto a SD-card. From within the running u-boot it was possible to execute a method from
+a cross-compiled object-file that simply returned an integer value.
+There also is a brief step-through for building u-boot and in the repository for this
+port (\textit{$briefings/build\_and\_run\_with\_uboot\_from\_sd-card$}).
+
+We were trying to figure out how to use u-boot for booting and supplying the standard
+library but all the files were spread all over the u-boot-source-directory.
+As we were realising how difficult it was going to be to not only have a functional
+binary based on our own code but also integrate the existing structure into the
+make-system of RIoT-OS, we didn't think we would be able to meet any goal beyond
+supplying a rudimentary framework so that coding can start in the RIoT-OS-codebase.
+
+By then we were behind schedule as we could not get anything to run that was not built
+on top of and run from within u-boot.
+

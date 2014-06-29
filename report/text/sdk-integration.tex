@@ -1,0 +1,47 @@
+\section{Integrating the i.MX6-Platform-SDK into RIoT-OS}
+
+Luckily, freescale supplies a SDK for the i.MX6-platform that is able to run on their
+reference-boards. We agreed with the teaching-staff to rather use the latest version of
+this SDK (1.1) because it is closer to developing applications in a C-manner, a bit more
+minimalistic and the source-tree is well-structured without making it too hard to find a
+particular piece of code and also, there are hardly any source-files that are irrelevant
+to this particular port.
+\\
+Then again, sadly, none of the targets for the SDK seem to produce code that runs on the
+RIoTboard and was not clear whether we would be able to produce anything using the SDK
+but it seemed like the right way to go because of its rather clean interfaces.
+
+The i.MX6-platform-SDK brings a \textit{make}-structure that has applications as targets
+and allows a target-board to be specified via parameters.
+After the board has been chosen, CPU- and board-specific code will be included based on
+defines.
+These defines were passed as parameters to \textbf{make}. We did not see any sense in
+adopting this pattern in RIoT-OS as it would have made changes to the
+\textit{make}-system necessary.
+In order to avoid this problem, we picked the defines relevant to the i.MX6Solo and the
+RIoTboard and changed the code manually as if the preprocessor had run.
+
+This has major implications for future ports to i.MX6-variants other than the
+Solo/DualLite: Every source- or header-file of the un-modified SDK containing
+\textit{\#ifdef}s or \textit{\#ifndef} potentially contains code important for a successful
+port.
+Because of our concerns about completing the project in time we decided not to develop a
+proper concept to deal with this issue.
+We do however have a proposal which might turn out to work quiet nice without putting to
+much effort into it:
+\begin{itemize}
+\item Add prefixes to SDK-macro names (e.g. \textbf{IMX6\_SDK\_})
+\item Define the necessary macros in the \textit{board-sdk.h}
+\item Include the header file in every SDK-file.
+\end{itemize}
+We could implement this relatively simple technique but we dont have the means to test
+it and expect a better way to exist.
+
+The next step was to correctly build the SDK when \textbf{make} was run from within RIoT.
+As even the \textit{Makefile}s of the SDK worked with defines, we decided to scrap and
+re-write them. Understanding the \textit{make}-structure of RIoT-OS and creating
+\textit{Makefile}s for the SDK took us about a week.
+
+Even though practically everything apart from the low-level initialisation-code needed
+minor to moderate adjustments we were able to skip the step of building a minimal program
+and go directly to builing the hello-world-program of RIoT-OS.

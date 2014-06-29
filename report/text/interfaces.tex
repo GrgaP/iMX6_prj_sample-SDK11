@@ -1,0 +1,31 @@
+\section{Enabling Interfaces of the RIoTboard within RIoT-OS}
+
+As all the components of the RIoTboard have a driver in the platform-SDK we did not
+expect these steps to be too hard. However, we heavily underestimated the importance of
+the IOMuxer on the board. This component has no driver in the SDK, as it is not supposed
+to be manipulated while the program is running. Instead you are supposed to use a
+windows-only tool called "IOMux-Tool" which allows muxing pins by clicking on the desired
+functions.
+It automatically checks for conflicts and can generate source-files containing macros
+that will work on the right registers without you having to worry about muxer-config
+after you have used the tool.
+We added a way to correctly alter and copy the generated source files into the right
+directories. See the corresponding briefing in our repository for instructions on using
+it (\textit{$briefings/muxer\_config$}).
+If you are not using this script, please make sure the IoMuxDesign.xml corresponds
+to the set of macros currently in the riotboard-directory of RIoT-OS.
+
+\subsection{UART}
+
+In the end, we had - by accident - enabled a mechanism that would forbid using the UART
+from being used while its buffer is overloaded.
+
+\subsection{Timers}
+
+\subsection{Interrupts}
+
+The SDK already offers a way to map interrupt-callback-routines to interrupt-IDs.
+We do not think this mechanism should be used directly. The drivers probably are the
+right way to use interrupts.
+This practically gave us a milestone for free. Apart from that, we would not have had the
+time to do anything else before cleaning the code.
