@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2014.3.18)  1 JUL 2014 13:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2014.3.18)  1 JUL 2014 14:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -614,18 +614,17 @@ LaTeX Info: Redefining \nameref on input line 12.
 \@outlinefile=\write3
 \openout3 = `report.out'.
 
-LaTeX Font Info:    Calculating math sizes for size <24> on input line 22.
-LaTeX Font Info:    Try loading font information for U+msa on input line 22.
- (/usr/share/texmf/tex/latex/amsfonts/umsa.fd
+ (./text/introduction.tex) (./text/preparation.tex
+LaTeX Font Info:    Try loading font information for U+msa on input line 7.
+
+(/usr/share/texmf/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 22.
+LaTeX Font Info:    Try loading font information for U+msb on input line 7.
 
 (/usr/share/texmf/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (./text/introduction.tex)
-(./text/preparation.tex) (./text/imx-boot.tex [1{/usr/share/texmf/fonts/map/pdf
-tex/updmap/pdftex.map}
+)) (./text/imx-boot.tex [1{/usr/share/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]) (./text/sdk-integration.tex
@@ -658,11 +657,11 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 43.
  ) 
 Here is how much of TeX's memory you used:
- 7156 strings out of 493315
- 103425 string characters out of 6145893
+ 7125 strings out of 493315
+ 102973 string characters out of 6145893
  200925 words of memory out of 5000000
- 10491 multiletter control sequences out of 15000+600000
- 113904 words of font info for 131 fonts, out of 8000000 for 9000
+ 10464 multiletter control sequences out of 15000+600000
+ 106545 words of font info for 111 fonts, out of 8000000 for 9000
  958 hyphenation exceptions out of 8191
  29i,7n,35p,250b,322s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/base/8r.enc}</usr/share/texmf/fonts/type1/p
@@ -670,7 +669,7 @@ ublic/amsfonts/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/c
 msy10.pfb></usr/share/texmf/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf/
 fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf/fonts/type1/urw/times/utmr8
 a.pfb></usr/share/texmf/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (3 pages, 87236 bytes).
+Output written on report.pdf (3 pages, 87208 bytes).
 PDF statistics:
  102 PDF objects out of 1000 (max. 8388607)
  90 compressed objects within 1 object stream
