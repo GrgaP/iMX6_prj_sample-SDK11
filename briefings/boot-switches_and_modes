@@ -43,6 +43,12 @@ usb-boot (serial download):
 DIP[1:8] = 01110111
 downloaded image must continue to service 32-second-watchdog timer.
 p.441
+	SD:
+DIP[1:8] = 10100101
+	µSD:
+DIP[1:8] = 10100110
+	eMMC:
+DIP[1:8] = 10110111
 over USB-OTG (not USB-PHY/OpenSDA)
 
 internal-boot:
@@ -56,12 +62,6 @@ copied to RAM device from where code execution occurs." p.416
 application destination pointer from image."
 
 
-	SD:
-DIP[1:8] = 10100101
-	µSD:
-DIP[1:8] = 10100110
-	eMMC:
-DIP[1:8] = 10110111
 
 internal ROM mem-map:
 p. 393

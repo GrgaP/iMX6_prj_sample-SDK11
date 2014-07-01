@@ -12,15 +12,43 @@ after you have used the tool.
 We added a way to correctly alter and copy the generated source files into the right
 directories. See the corresponding briefing in our repository for instructions on using
 it (\textit{$briefings/muxer\_config$}).
-If you are not using this script, please make sure the IoMuxDesign.xml corresponds
-to the set of macros currently in the riotboard-directory of RIoT-OS.
+If you are not using this script, please make sure the IoMuxDesign.xml always matches the
+set of macros currently in the riotboard-directory of RIoT-OS.
+
+\subsection{LED}
+During our preparation for running a minimalistic C-program on the RIoTboard we had
+looked up how the connection of the CPU to the LEDs work.
+With this knowledge is was very easy to write code for flashing the LEDs using the SDKs
+GPIO-driver.
+The program we were running then needed only the GPIO-pins to be configured in the muxer.
 
 \subsection{UART}
+We also spent a large amount of time on enabling UART2 for I/O-support:
+Although the UART-initialisation ran on the right registers and nothing seemed to be
+wrong with with the code itself, the UART did not do anything. Neither could we receive
+any output nor did the board process any of the signals we sent.
+Without the UART our only means for testing were the LEDs. When we thought it could be
+only the output-channel that was not working, we tried toggling the LED upon reception.
+
+We tried replacing the default SDK-code for initialisation with u-boot-code that was
+altered to use the SDK-macros. This version could be fixed by rearranging the
+instructions in a different order. We did not understand why this worked.
 
 In the end, we had - by accident - enabled a mechanism that would forbid using the UART
-from being used while its buffer is overloaded.
+from being used while its buffer is overloaded. This mechanism stopped the UART from
+working altogether because the other side was not configured to use it.
+For some reason this was also activated in the default SDK-code.
 
 \subsection{Timers}
+Having missed our last deadline we decided to get help understanding the timer-interface
+of RIoT-OS before we started working on this subsystem. We were told there was a clean
+implementation using another layer of timer-abstraction in the code for another
+processor.
+But as soon as we started implementing this new lower-level interface we noticed that the
+SDK already offered a higher-level abstraction and scrapped the code we had so far.
+There were only slight conceptual problems with mapping the SDK-driver to the
+RIoT-OS-interface because of the SDK offering slightly differenct functions than RIoT-OS
+expects.
 
 \subsection{Interrupts}
 
@@ -29,3 +57,4 @@ We do not think this mechanism should be used directly. The drivers probably are
 right way to use interrupts.
 This practically gave us a milestone for free. Apart from that, we would not have had the
 time to do anything else before cleaning the code.
+And the code being useable in the future is more useful than another interface.

@@ -1,0 +1,15 @@
+For this, you will need Windows.
+
+copy the "IoMuxDesign.xml" from the "board/riotboard/tools"-directory from RIoT-OS in a folder you can write to from windows.
+This folder should not contain any more files, especially no *.c-files and can be on a shared partition on your computer or a USB-flash-drive.
+
+In windows, start the IOMux.exe from the i.MX6-platform-SDK located in the "tools/windows/iomux"-folder.
+Open the IoMuxDesign.xml, alter the configuration as you wish.
+Save it and then click on "generate source-files" in the second context-menu.
+Put the source files in the folder where the IoMuxDesign.xml lies.
+
+Back in your productive OS - I assume you're not using Windows - mount the volume containing your folder and run
+£ ./fetch_iomuxtool_generated_source /path/to/the/directory/containing/the/xml-file
+from within the "board/riotboard/tools"-directory. This script checks that you selected the right folder, copies all the generated files to the locations where the build-system expects them to be and replaces the old IoMuxDesign.xml with the new one.
+
+Currently, the "testoutputpath"-script is written in instantfpc, which you might not have; but it can easily be written in c or bash. When I was working on that script my c and bash skillz were already asleep.

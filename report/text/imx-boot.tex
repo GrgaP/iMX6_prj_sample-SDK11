@@ -13,6 +13,19 @@ next to the ethernet-port and UART2-pins.
 Slightly more-detailed information can be found in the gitlab-repository mentioned in
 the introduction (\textit{$briefings/boot-switches\_and\_-modes$})
 
+At startup, the program on the ROM loads a chunk from the beginning of the chosen boot
+device and checks the existence of an IVT (Image-Vector-Table). This table contains the
+start address of the program-code, a checksum and a pointer to DCD
+(Device-Configuration-Data). DCD is used to initialise register-memory and consists of
+pairs of addresses and 32-bit values which will be written to the registers at the
+preceding address. Details on this can be found in the i.MX6 processor reference manual
+in the chapter "Image Vector Table and Boot Data".
+The offset of the IVT for the RIoTboard - as all devices are connected via UDSHC - is 1KB
+ - which allows a MBR to be placed on the device also - and the size of the initially
+loaded chunk is 4KB, so the first partition should not start before \$1400. Too quickly
+get an image to run on the RIoTboard follow the steps in
+\textit{$build\_and\_run\_with\_uboot\_from\_sd-card$}.
+
 \section{Running our own Software}
 
 The simplest thing we could get to run on the RIoTboard was u-boot: Either via the serial
@@ -20,8 +33,9 @@ connection, where the freshly transferred u-boot and an initramfs could be used 
 receive files or binary that could then be stored on the board, or by writing the binary
 onto a SD-card. From within the running u-boot it was possible to execute a method from
 a cross-compiled object-file that simply returned an integer value.
-There also is a brief step-through for building u-boot and in the repository for this
-port (\textit{$briefings/build\_and\_run\_with\_uboot\_from\_sd-card$}).
+The brief step-through for building u-boot and running it on the RIoTboard in our
+repository also contains information on the object-file-test
+(\textit{$briefings/build\_and\_run\_with\_uboot\_from\_sd-card$}).
 
 We were trying to figure out how to use u-boot for booting and supplying the standard
 library but all the files were spread all over the u-boot-source-directory.
@@ -30,6 +44,5 @@ binary based on our own code but also integrate the existing structure into the
 make-system of RIoT-OS, we didn't think we would be able to meet any goal beyond
 supplying a rudimentary framework so that coding can start in the RIoT-OS-codebase.
 
-By then we were behind schedule as we could not get anything to run that was not built
+By then we were behind schedule as we could not get anything to work that was not built
 on top of and run from within u-boot.
-

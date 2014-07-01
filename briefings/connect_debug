@@ -1,4 +1,5 @@
 connect the RXD, TXD and GNG to the three pins next to eth.
+The pin towards the mini-USB-port is RXD, the one in the middle is TXD and the last one GND.
 
 the pin next to the screw is GND.
 the pin in the middle is TXD

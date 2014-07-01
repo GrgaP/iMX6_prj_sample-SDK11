@@ -7,7 +7,7 @@ set envvars, these are mine:
 £ make mx6solo_RIoTboard_config
 £ make all
 
-create a partition on your sd-card, but leave space for the u-boot image!
+create a partition on your SD-card, but leave space for the u-boot image!
 quick walkthrough using fdisk:
 -------------------------------------------------------------------------------
 £ fdisk /dev/mmcblk0
@@ -21,8 +21,14 @@ press w
 now you should be able to mount /dev/mmcblk0p1
 -------------------------------------------------------------------------------)
 
-£ dd if=/home/leon/git/u-boot-imx-flavor/u-boot.bin of=/dev/mmcblk0 seek=2 skip=2 bs=512
+assuming /dev/mmcblk0 is your SD-card:
+£ dd if=u-boot.bin of=/dev/mmcblk0 seek=2 skip=2 bs=512
 £ sync
+
+put the SD-card into the SD-card--slot
+make sure the DIP-switches[1:8] are set to 10100101 (and the board is powered off)
+power on and .. tada!
+terminal is available on the uart2 (J16/DEBUG)
 
 
 Program:
@@ -62,3 +68,4 @@ then load the file:
 £ fatload mmc 1 0x10000000 main
 and run!
 £ go 0x10008000
+this is the address where the you chose to load the object file to + the offset of the entry point to the "main"-method

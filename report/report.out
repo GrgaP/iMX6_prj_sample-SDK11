@@ -7,6 +7,7 @@
 \BOOKMARK [1][-]{section.4}{Running our own Software}{}% 7
 \BOOKMARK [1][-]{section.5}{Integrating the i.MX6-Platform-SDK into RIoT-OS}{}% 8
 \BOOKMARK [1][-]{section.6}{Enabling Interfaces of the RIoTboard within RIoT-OS}{}% 9
-\BOOKMARK [2][-]{subsection.6.1}{UART}{section.6}% 10
-\BOOKMARK [2][-]{subsection.6.2}{Timers}{section.6}% 11
-\BOOKMARK [2][-]{subsection.6.3}{Interrupts}{section.6}% 12
+\BOOKMARK [2][-]{subsection.6.1}{LED}{section.6}% 10
+\BOOKMARK [2][-]{subsection.6.2}{UART}{section.6}% 11
+\BOOKMARK [2][-]{subsection.6.3}{Timers}{section.6}% 12
+\BOOKMARK [2][-]{subsection.6.4}{Interrupts}{section.6}% 13
