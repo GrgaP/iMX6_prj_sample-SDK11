@@ -1,0 +1,154 @@
+\documentclass[9pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{hyperref}
+
+ \include{fu-beamer-template}
+
+\title{Bringing RIoT-OS to the RIoTboard}
+ % \subtitle{Zweite Zw.-Pres.}
+
+\author{Leon Martin George}
+
+ \institute[FU Berlin]{Freie Universität Berlin}
+
+ \date{Softwareproject - Telematics, 2014}
+
+ \subject{\fontsize{15cm}{1em}Computer Science}
+
+ \renewcommand{\footlinetext}{\insertshortinstitute, \insertshorttitle, \insertshortdate}
+ \newcommand{\tableofsubs}{\tableofcontents[currentsection,sectionstyle=show/show,subsectionstyle=show/shaded/hide]}
+
+\begin{document}
+
+ \begin{frame}[plain]
+  \titlepage
+% 
+ \end{frame}
+
+\section{Motivation}
+
+\begin{frame}{The Board}
+ \begin{itemize}
+ \item Designed for developing
+% comes with instructions for android and linux. android preinstalled
+ \item Cortex-A9-based
+% 1 GHz, single-core\\
+ \item Freescale i.MX6-architecture
+% SOC for mm-applications\\
+ \item Co-processing power
+% chips for decoding x264, 2d- and 3d-graphics\\
+ \item Many different interfaces
+% USB, eth, sound, HDMI, Display-Port, dev-stuff like JTAG, UART
+% Can boot from internal memory, or SD-card
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Why Do We Want This?}
+% RIOT-OS is not known for it's need to run on phones.
+% With i.MX6-support RIoT-OS could be used for 
+ \begin{itemize}
+ \item Automotive 
+% automotive,\\
+ \item Industrial 
+% industrial,\\
+ \item Handheld consoles
+% handheld consoles,
+ \item Easy developement
+% easy developement->This often is underestimated. Most microprocessors are
+% painful to target for developing. The RIoTboard is aimed at developers: You
+% can have different programs on the board itself or on several SD-cards.
+% Flashing can be done to either targets via USB or directly to an SD-Card
+% without having to destroy the data on the partitions (after some preparation).
+% The fully-developed program can probably be used for any other i.MX6-board
+% without too many modifications, if any (maybe IOMux brrrrrrrrrrr).
+ \end{itemize}
+\end{frame}
+
+\section{Our original idea of how to do shit}
+\begin{frame}{Initial Work-Model}
+ \begin{itemize}
+ \item Assess the situation
+% This was easy. Many documents.
+ \item Try running anything on the board
+% We have to documents from the manufacturer: One is a schematic and the other
+% is specification for the hardware with instructions on flashing either the SD
+% -card or the internal eMMC (micro-SD they forgot somehow) with ubuntu or android.
+% Glad there were instructions for this.
+ \item Run our own code
+% After having realised that we wouldn't be able to flash the ROM, we tried
+% going through u-boot and loaded just a main() onto the board.
+ \item Get a framework to run
+% We wanted to use u-boot but the IOMux-configuration would then have been
+% fixed and it is usually a bad idea to change that (what RIoT would have
+% ultimately done). Plus, the teaching staff convinced us that the i.MX6-SDK
+% is much nicer. Somehow, we have got a working framework.
+ \item Split to work on different components individually
+% Even though we could, in theory, start getting specific hardware to work
+% with RIoT-OS, there is a significant problem.
+ \end{itemize}
+\end{frame}
+
+\section{Achievements}
+
+\begin{frame}{The Original Plan:}
+% from the orinal slides:
+ \begin{itemize}
+ \item UART I/O for debugging and shell communication
+% uart. erm. problems. everything set up, but no cigar\\
+ \item Timer(s) so the kernel can run
+% timers are running by default, but not yet usable by RIoT (or in fact: the
+% UART)\\
+ \item Interrupts
+% interrupts are enable, but no implementation for interface to RIoT\\
+ \item Set up a stack
+% set-up stack, done (works nicely due to the SDK)\\
+ \item Build it successfully (probably the hardest part :-) )
+% This worked after about a month
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Unfinished Work}
+% The slide should rather be called "The One Big Problem" because there is this
+% one thing that is really bugging us:
+ \begin{itemize}
+ \item The UART
+% We tried the default configuration from the SDK, diy-UART-init, inserted
+% adapted u-boot-code, tried configs for other boards and made some ourselves
+% with the IOMux-config-tool from the SDK which generates headers with register
+% -definitions and macro-implementations.\\
+ \item Timers
+% Then there is timers
+ \item Interrupts
+% and interrupts\\
+ \end{itemize}
+% but with the only working debugging facilities being to LEDs, this is a
+% rather terrifying task
+\end{frame}
+
+\begin{frame}{Interference}
+ \begin{itemize}
+ \item Going from u-boot to SDK
+% This was initially a drawback because it took us significantly longer to
+% integrate the SDK than it would have with u-boot(mainly because the board-
+% specific code from u-boot is squeezed into just 4 source-files.
+% But after the make-process of the SDK was integrated into RIoT-OS it was
+% really easy to adjust the start-process. So by then we were early.
+ \item The UART initialisation process
+% Nuff said on that.
+ \end{itemize}
+\end{frame}
+
+\section{Future Tense}
+
+\begin{frame}{Plans}
+ \begin{itemize}
+ \item Try altering IOMux-configurations for other boards
+% Other IOMux-confs might offer insight on what is going wrong
+ \item JTAG-debugging
+% Avoid the UART-related problems to allow getting to work on other components
+ \end{itemize}
+\end{frame}
+
+\end{document}
