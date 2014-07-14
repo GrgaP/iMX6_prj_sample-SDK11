@@ -3,13 +3,15 @@
 \usepackage[utf8]{inputenc}
 \usepackage{mathtools}
 \usepackage{hyperref}
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.90}
 
  \include{fu-beamer-template}
 
 \title{Bringing RIoT-OS to the RIoTboard}
  % \subtitle{Zweite Zw.-Pres.}
 
-\author{Leon Martin George}
+\author{Lennart Dührsen and Leon Martin George}
 
  \institute[FU Berlin]{Freie Universität Berlin}
 
@@ -24,131 +26,193 @@
 
  \begin{frame}[plain]
   \titlepage
-% 
+% Were porting to the RIoTboard. You probably know us by now...
  \end{frame}
 
 \section{Motivation}
 
-\begin{frame}{The Board}
+\begin{frame}{Context}
  \begin{itemize}
- \item Designed for developing
-% comes with instructions for android and linux. android preinstalled
- \item Cortex-A9-based
-% 1 GHz, single-core\\
- \item Freescale i.MX6-architecture
-% SOC for mm-applications\\
- \item Co-processing power
-% chips for decoding x264, 2d- and 3d-graphics\\
- \item Many different interfaces
-% USB, eth, sound, HDMI, Display-Port, dev-stuff like JTAG, UART
-% Can boot from internal memory, or SD-card
+% also commonly known as: META-stuff-slide
+ \item what do we want?
+ \begin{itemize}
+ \item RIoT-OS running on the RIoTboard
+% because, why not?
+ \item have fun coding
+% who doesn't?
+ \item fancy hardware
+% thank you (for the hardware)
+ \item credit points
+% why wouldn't we?
+ \end{itemize}
+ \item what did we expect to achieve?
+ \begin{itemize}
+ \item get the hardware for free
+% because that's the only real reason to join a telematics-project
+ \item basic support of the RIoTboard for RIoT-OS
+% just because these names go really well together..
+ \item be motivated enough to continue working on the port after the software-project
+% seems like it's far more interesting than "deytabeysis" + plus we can keep the board for as long as we are working on it
+ \end{itemize}
  \end{itemize}
 \end{frame}
 
-\begin{frame}{Why Do We Want This?}
-% RIOT-OS is not known for it's need to run on phones.
-% With i.MX6-support RIoT-OS could be used for 
+\section{Task-Division}
+
+\begin{frame}{Task-Division}
+% aka "boring slide"
  \begin{itemize}
- \item Automotive 
-% automotive,\\
- \item Industrial 
-% industrial,\\
- \item Handheld consoles
-% handheld consoles,
- \item Easy developement
-% easy developement->This often is underestimated. Most microprocessors are
-% painful to target for developing. The RIoTboard is aimed at developers: You
-% can have different programs on the board itself or on several SD-cards.
-% Flashing can be done to either targets via USB or directly to an SD-Card
-% without having to destroy the data on the partitions (after some preparation).
-% The fully-developed program can probably be used for any other i.MX6-board
-% without too many modifications, if any (maybe IOMux brrrrrrrrrrr).
+ \item sub-goals:
+% we had help planning the steps before the project even started
+ \begin{itemize}
+ \item gather relevant documents
+% if only we had read them also...
+ \item find out how on the board "works"
+% we asked for the hardware early and having the board and a linux-port really helps
+ \item build a basic application that runs on the board (LED-blinking)
+% get something to run
+ \item build this application from within RIoT-OS (run our program from the \texttt{board\_init})
+% build "something" the RIoT-style
+ \item enable interrupts
+% interrupts are enabled
+ \item UART for STDIO
+% stdio is somehow nice to have
+ \item implement timer-interface
+% there are two....
+ \item wiki pages
+% have wiki pages in our github-fork
+ \end{itemize}
+ \item milestone arrangement
+% these points really don't make sense in any other order
+ \item milestones have dates assigned
+% the team urged us not to try to do too much and we were very conservative with the dates
  \end{itemize}
 \end{frame}
 
-\section{Our original idea of how to do shit}
-\begin{frame}{Initial Work-Model}
+\begin{frame}{Milestones - Original}
+% these are the milestones
  \begin{itemize}
- \item Assess the situation
-% This was easy. Many documents.
- \item Try running anything on the board
-% We have to documents from the manufacturer: One is a schematic and the other
-% is specification for the hardware with instructions on flashing either the SD
-% -card or the internal eMMC (micro-SD they forgot somehow) with ubuntu or android.
-% Glad there were instructions for this.
- \item Run our own code
-% After having realised that we wouldn't be able to flash the ROM, we tried
-% going through u-boot and loaded just a main() onto the board.
- \item Get a framework to run
-% We wanted to use u-boot but the IOMux-configuration would then have been
-% fixed and it is usually a bad idea to change that (what RIoT would have
-% ultimately done). Plus, the teaching staff convinced us that the i.MX6-SDK
-% is much nicer. Somehow, we have got a working framework.
- \item Split to work on different components individually
-% Even though we could, in theory, start getting specific hardware to work
-% with RIoT-OS, there is a significant problem.
+ \item get familiar with the board
+ 	\begin{itemize}
+ 	\item boot it, read manuals and documentation
+ 	\item try features with existing OS that supports it
+ 	\item understand target architecture
+ 	\item flash it
+ 	\item cross-compile
+ 	\item be able to actually run bare-metal code
+ 	\end{itemize}
+ \item find out what needs to be done for a port
+ 	\begin{itemize}
+ 	\item identify re-useable code
+% |let them read a bit|
+% identify re-useable code: panic mode! \\
+ 	\item learn about interfaces in RIoT
+% learn about interfaces in RIoT: skipped this and ran straight to adjusting the code of the SDK
+ 	\end{itemize}
+ \item port it
+ 	\begin{itemize}
+ 	\item patch SDK for use in RIoT
+ 	\item successfully build
+ 	\item debug
+ 	\end{itemize}
  \end{itemize}
 \end{frame}
 
-\section{Achievements}
 
-\begin{frame}{The Original Plan:}
-% from the orinal slides:
+\section{Outcome}
+
+\begin{frame}{Outcome}
  \begin{itemize}
- \item UART I/O for debugging and shell communication
-% uart. erm. problems. everything set up, but no cigar\\
- \item Timer(s) so the kernel can run
-% timers are running by default, but not yet usable by RIoT (or in fact: the
-% UART)\\
- \item Interrupts
-% interrupts are enable, but no implementation for interface to RIoT\\
- \item Set up a stack
-% set-up stack, done (works nicely due to the SDK)\\
- \item Build it successfully (probably the hardest part :-) )
-% This worked after about a month
+  \item all goals reached
+% but..
+ 	\item spaghetti
+% we have working code that is in an "interesting" state
  \end{itemize}
 \end{frame}
 
-\begin{frame}{Unfinished Work}
-% The slide should rather be called "The One Big Problem" because there is this
-% one thing that is really bugging us:
+\begin{frame}{Problems - documentation}
+% or: did everything work as expected?
+% short answer - as with every project: no (or nöööö)
+% while gathering documents we were expecting something like a straight-forward
+% memory-map like we were used to from the micro-processor-lab
  \begin{itemize}
- \item The UART
-% We tried the default configuration from the SDK, diy-UART-init, inserted
-% adapted u-boot-code, tried configs for other boards and made some ourselves
-% with the IOMux-config-tool from the SDK which generates headers with register
-% -definitions and macro-implementations.\\
- \item Timers
-% Then there is timers
- \item Interrupts
-% and interrupts\\
- \end{itemize}
-% but with the only working debugging facilities being to LEDs, this is a
-% rather terrifying task
-\end{frame}
-
-\begin{frame}{Interference}
- \begin{itemize}
- \item Going from u-boot to SDK
-% This was initially a drawback because it took us significantly longer to
-% integrate the SDK than it would have with u-boot(mainly because the board-
-% specific code from u-boot is squeezed into just 4 source-files.
-% But after the make-process of the SDK was integrated into RIoT-OS it was
-% really easy to adjust the start-process. So by then we were early.
- \item The UART initialisation process
-% Nuff said on that.
+ \item expectation: to turn on the LED write a bit to \$beef1337:3
+% warning: the ugliness of these slides depicts the ugliness of having to find out these things the hard way
+ \item reality:
+ 	\begin{itemize}
+ \item i.MX6-reference-manual
+ 		\begin{itemize}
+ \item the status of a GPIO-pin is determined by a bit in a register that can be anywhere - based on the configuration of the muxer
+ \item names of channels in the muxer are from the same namespace as the functions mapped onto them
+ 		\end{itemize}
+ \item RIoTboard-schematics
+ 		\begin{itemize}
+ \item one LED on the RIoTboard is connected to a function "EIM\_DATAwx" \textcolor{light-gray}{which you can then map GPIOyz on}
+ 		\end{itemize}
+ 	\end{itemize}
  \end{itemize}
 \end{frame}
 
-\section{Future Tense}
-
-\begin{frame}{Plans}
+\begin{frame}{Problems - reference code}
  \begin{itemize}
- \item Try altering IOMux-configurations for other boards
-% Other IOMux-confs might offer insight on what is going wrong
- \item JTAG-debugging
-% Avoid the UART-related problems to allow getting to work on other components
+ \item embest-tech doesn't supply a muxer-configuration-file that can be used with the SDK
+% which is kinda sad. They have targeted mainly android development and a bit of linux
+ \item maybe looking at how they did it for their u-boot- and linux-ports helps?
+% is spaghetti. we don't dare think about how our code would look like if be based it on spaghetti.
+ \item reconsideration: the i.MX6-platform-SDK has macros to abstract to and from the muxer config
+% which you can only use if you have valid configuration file which in turn can only be created and generated code from with a windows-only-tool
  \end{itemize}
 \end{frame}
+
+\begin{frame}{Problems - different abstractions}
+ \begin{itemize}
+ \item The platform-SDK differentiates between code concerning
+% then there is a problem of different abstractions in the SDK and in RIoT
+ 	\begin{itemize}
+ 	\item the i.MX6-architecture
+% CPU, interrupt-controller
+ 	\item contained peripherals
+% driver for UART and timers (which in RIoT belong to the CPU) or ethernet and USB
+ 	\item board-specific headers and iomux-configuration
+% iomux-configuration, register definitions (depending on the kind of i.MX6 - SL - SDL - D)
+ 	\end{itemize}
+ \item RIoT has its own abstraction for each of those (dividing the sub-topics differently)
+% We should we include the SDK ?
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Demo}
+DEMO (of \texttt{printf}s and flashing LEDs)
+\end{frame}
+
+\begin{frame}{PRs}
+% At the time of writing we have one failed, a successful and another pending pull request:
+ \begin{itemize}
+ \item \#1355 was closed in favour of \#1359 \textcolor{light-gray}{Leon had trouble keeping the git-log tidy}
+% This would have allowed using LD for linking by changing the global Makefile and the
+% Makefile of any board not using LD (so far: all except the RIoTboard).
+ \item \#1359 was merged - with the help of staff members and RIoT-maintainers.
+% This basically does the same as \#1355 but leaves other Makefiles untouched and
+% assuming GCC to be used by default. Boards using LD have to explicitely supply a
+% variable.
+ \item \#1411 is still pending and we do not know whether it will be merged.
+% It's purpose is to bring the software-project to a conclusion and add support for
+% the riotboard and the i.MX6-SDK.
+ \end{itemize}
+\end{frame}
+
+\section{Future}
+
+\begin{frame}{Perspectives}
+ \begin{itemize}
+ \item still motivated
+ \item perhaps scrap the existing code and restart
+ \end{itemize}
+\end{frame}
+
+\begin{frame}{Questions?}
+
+\end{frame}
+
 
 \end{document}

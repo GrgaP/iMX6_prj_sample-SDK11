@@ -89,16 +89,10 @@
 % build "something" the RIoT-style
 \pause
  \item enable interrupts
-% interrupts are enabled
-\pause
- \item UART for STDIO
-% stdio is somehow nice to have
+% interrupts are enabled 
 \pause
  \item implement timer-interface
-% there are two....
-\pause
- \item wiki pages
-% have wiki pages in our github-fork
+% 
 \pause
  \end{itemize}
  \item milestone arrangement
@@ -109,46 +103,12 @@
  \end{itemize}
 \end{frame}
 
-\begin{frame}{Milestones - Original}
-% these are the milestones
- \begin{itemize}
- \item get familiar with the board
- 	\begin{itemize}
- 	\item boot it, read manuals and documentation
- 	\item try features with existing OS that supports it
- 	\item understand target architecture
- 	\item flash it
- 	\item cross-compile
- 	\item be able to actually run bare-metal code
- 	\end{itemize}
- \item find out what needs to be done for a port
- 	\begin{itemize}
- 	\item identify re-useable code
-% |let them read a bit|
-% identify re-useable code: panic mode! \\
- 	\item learn about interfaces in RIoT
-% learn about interfaces in RIoT: skipped this and ran straight to adjusting the code of the SDK
- 	\end{itemize}
- \item port it
- 	\begin{itemize}
- 	\item patch SDK for use in RIoT
- 	\item successfully build
- 	\item debug
- 	\end{itemize}
- \end{itemize}
-\end{frame}
-
-
 \section{Outcome}
 
 \begin{frame}{Outcome}
 \pause
  \begin{itemize}
-  \item all goals reached
-% but..
-\pause
- 	\item spaghetti
-% we have working code that is in an "interesting" state
+  \item 
  \end{itemize}
 \end{frame}
 
@@ -159,10 +119,10 @@
 % memory-map like we were used to from the micro-processor-lab
 \pause
  \begin{itemize}
- \item expectation: to turn on the LED write a bit to \$beef1337:3
+ \item expectation: to turn on the LED write a bit to \$meow:3
+ \item reality: \textcolor{light-gray}{You should be worried there is another break here}
 % warning: the ugliness of these slides depicts the ugliness of having to find out these things the hard way
 \pause
- \item reality:
  	\begin{itemize}
  \item i.MX6-reference-manual
  		\begin{itemize}
@@ -174,76 +134,23 @@
  \item one LED on the RIoTboard is connected to a function "EIM\_DATAwx" \textcolor{light-gray}{which you can then map GPIOyz on}
  		\end{itemize}
  	\end{itemize}
+\pause
  \end{itemize}
 \end{frame}
 
 \begin{frame}{Problems - reference code}
  \begin{itemize}
-\pause
+ \item blablabla
+ 	\begin{itemize}
  \item embest-tech doesn't supply a muxer-configuration-file that can be used with the SDK
 % which is kinda sad. They have targeted mainly android development and a bit of linux
-\pause
  \item maybe looking at how they did it for their u-boot- and linux-ports helps?
 % is spaghetti. we don't dare think about how our code would look like if be based it on spaghetti.
+ 	\end{itemize}
 \pause
  \item reconsideration: the i.MX6-platform-SDK has macros to abstract to and from the muxer config
 % which you can only use if you have valid configuration file which in turn can only be created and generated code from with a windows-only-tool
  \end{itemize}
-\end{frame}
-
-\begin{frame}{Problems - different abstractions}
- \begin{itemize}
-\pause
- \item The platform-SDK differentiates between code concerning
-% then there is a problem of different abstractions in the SDK and in RIoT
-\pause
- 	\begin{itemize}
- 	\item the i.MX6-architecture
-% CPU, interrupt-controller
-\pause
- 	\item contained peripherals
-% driver for UART and timers (which in RIoT belong to the CPU) or ethernet and USB
-\pause
- 	\item board-specific headers and iomux-configuration
-% iomux-configuration, register definitions (depending on the kind of i.MX6 - SL - SDL - D)
-\pause
- 	\end{itemize}
- \item RIoT has its own abstraction for each of those (dividing the sub-topics differently)
-% We should we include the SDK ?
- \end{itemize}
-\end{frame}
-
-\begin{frame}{Demo}
-DEMO (of \texttt{printf}s and flashing LEDs)
-\end{frame}
-
-\begin{frame}{PRs}
-% At the time of writing we have one failed, a successful and another pending pull request:
- \begin{itemize}
- \item \#1355 was closed in favour of \#1359 \textcolor{light-gray}{Leon had trouble keeping the git-log tidy}
-% This would have allowed using LD for linking by changing the global Makefile and the
-% Makefile of any board not using LD (so far: all except the RIoTboard).
- \item \#1359 was merged - with the help of staff members and RIoT-maintainers.
-% This basically does the same as \#1355 but leaves other Makefiles untouched and
-% assuming GCC to be used by default. Boards using LD have to explicitely supply a
-% variable.
- \item \#1411 is still pending and we do not know whether it will be merged.
-% It's purpose is to bring the software-project to a conclusion and add support for
-% the riotboard and the i.MX6-SDK.
- \end{itemize}
-\end{frame}
-
-\section{Future}
-
-\begin{frame}{Perspectives}
- \begin{itemize}
- \item still motivated
- \item perhaps scrap the existing code and restart
- \end{itemize}
-\end{frame}
-
-\begin{frame}{Questions?}
-
 \end{frame}
 
 

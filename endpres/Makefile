@@ -1,7 +1,7 @@
 TARGET?=main
 LATEX_BUILD_CMD=pdflatex -interaction=nonstopmode
 
-default: build
+default: build slim notes
 
 clean:
 	mv FULogo_RGB.pdf FULogo_RGB

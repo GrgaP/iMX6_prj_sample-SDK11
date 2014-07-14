@@ -1,0 +1,21 @@
+\section{pull requests}
+
+At the time of writing we have one failed, a successful and another pending pull request:
+\begin{itemize}
+\item \#1355 was closed in favour of \#1359. Leon had trouble keeping the git-log tidy.
+This would have allowed using LD for linking by changing the global Makefile and the
+Makefile of any board not using LD (so far: all except the RIoTboard).
+\item \#1359 was merged - with the help of staff members and RIoT-maintainers.
+This basically does the same as \#1355 but leaves other Makefiles untouched and
+assuming GCC to be used by default. Boards using LD have to explicitely supply a
+variable.
+\item \#1411 is still pending and we do not know whether it will be merged.
+It's purpose is to bring the software-project to a conclusion and add support for
+the riotboard and the i.MX6-SDK.
+\end{itemize}
+
+Despite the struggles during the work so far we remain motivated to continue on this
+port.
+THIS GOES TO ANOTHER TEX FILE:
+Should we ever do another project we will focus more on maintaining a clean codebase than
+on adding as much functionality at once.
