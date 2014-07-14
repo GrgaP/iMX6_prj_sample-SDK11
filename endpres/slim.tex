@@ -171,7 +171,7 @@
  	\begin{itemize}
  	\item the i.MX6-architecture
 % CPU, interrupt-controller
- 	\item contained peripherals
+ 	\item peripherals
 % driver for UART and timers (which in RIoT belong to the CPU) or ethernet and USB
  	\item board-specific headers and iomux-configuration
 % iomux-configuration, register definitions (depending on the kind of i.MX6 - SL - SDL - D)
@@ -198,6 +198,8 @@ DEMO (of \texttt{printf}s and flashing LEDs)
  \item \#1411 is still pending and we do not know whether it will be merged.
 % It's purpose is to bring the software-project to a conclusion and add support for
 % the riotboard and the i.MX6-SDK.
+% This contains hundreds of file from the SDK that have been altered to just work.
+% (obviously not fit for rolling out)
  \end{itemize}
 \end{frame}
 
@@ -207,6 +209,8 @@ DEMO (of \texttt{printf}s and flashing LEDs)
  \begin{itemize}
  \item still motivated
  \item perhaps scrap the existing code and restart
+% restart in two weeks of time
+ \item or: clean the existing code
  \end{itemize}
 \end{frame}
 
