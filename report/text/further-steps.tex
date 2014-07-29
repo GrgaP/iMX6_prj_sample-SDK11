@@ -1,0 +1,13 @@
+\section{TODO}
+
+This section of the report is about steps that should be taken not only to finish the sofware-project but also have a port that can be merged.
+
+These are the steps which should be considered:
+\begin{itemize}
+\item move files from the packages back into boards/riotboard and cpu/imx6
+\item remove headers and iomux-config for components that will not be used
+\item strip the remaining header files of macros, bitmasks and -offsets
+\item fix license-headers of remaining untouched source-files or adjust check.sh to tolerate the BSD-style licenses
+\end{itemize}
+
+Because there are about twenty register-files for each variant of the i.MX6 and they contain thousands of lines of code we decided we would not do that but leave the TODO  
