@@ -68,17 +68,3 @@
         urldate = {2014-08-04},
         note = "Last accessed August 4, 2014"
 }
-
-@misc { git-uboot,
-        title = "{Git Repository for u-boot fork by embest-tech for i.MX6 platforms}",
-        howpublished = "\texttt{\url{https://github.com/embest-tech/uboot-imx}}",
-        urldate = {2014-08-04},
-        note = "Last accessed August 4, 2014"
-}
-
-@misc { forum,
-        title = "{RIoTboard Forum}",
-        howpublished = "\texttt{\url{http://www.element14.com/community/community/designcenter/single-board-computers/riotboard/}}",
-        urldate = {2014-08-04},
-        note = "Last accessed August 4, 2014"
-}

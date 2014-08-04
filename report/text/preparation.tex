@@ -4,64 +4,63 @@ In order to complete the project successfully, we agreed on these goals with the
 teaching-staff:
 
 \begin{itemize}
-\item The RIoT-OS-wiki has pages on working with the hardware
-\item RIoT-OS compiles for the RIoTboard
-\item Interfaces to timers, UART and interrupts is implemented
+\item Create wiki pages on working with the hardware
+\item Compile RIOT-OS for the RIoTboard
+\item Implement interfaces for timers, UART and interrupts
 \end{itemize}
 
-As we had no idea how hard it was going to be, we were very generous with the curfews
+As we had no idea how hard it was going to be, we were very generous with the 
+curfews
 for the different steps.
 
 \subsection{Hardware and Information}
-The RIoTboard is a rather unusual board for the RIoT-OS to run on.
-It is based on the "i.MX6Solo" freescale-architecture, has an ARM cortex-A9, many
-different interfaces and is supposed to be used mainly by developers.
-It is shipped without a power-supply and with a USB-cable.
 
-The manufacturer supplies two relevant documents: A Quick-User-Guide/User-Manual/
-Technical-Data-Sheet and the
-board schematics.
-The board-manual consists mainly of a list of interfaces with picture of where to find
-them on the board. If you have physical access to the board, the only thing useful you
-will learned from there is which mini-USB-port is for OpenSDA and which is for the
-serial-connection.
-At the end there is a step-by-step instruction on "flashing" linux or android onto the
-board, by using a Windows-only tool, arranging the eight DIP-switches on the board in
-three different ways.
-The schematics file yields a bit more information, such as which pin is connected to
-what.
+The manufacturer supplies two relevant documents: A 
+Quick-User-Guide/User-Manual/
+Technical-Data-Sheet and the board schematics.
+The board-manual consists mainly of a list of interfaces with picture of where 
+to find them on the board. If you have physical access to the board, the only 
+thing useful you will learn from it is which mini-USB-port is for OpenSDA 
+and which is for the serial-connection.
+At the end there is a step-by-step instruction on "flashing" linux or android 
+onto the board, by using a Windows-only tool, arranging the eight DIP-switches 
+on the board in three different ways.
+The schematics file yields a bit more information, such as which pin is 
+connected to what.
 Other pieces of information, like which pin of UART2 is GND/TXD/RXD, is missing.
 You can find that information in the repository mentioned in the introduction
 (\textit{$briefings/connect\_debug$}).
-In order to understand the way the board works the i.MX6SDL processor reference manual is
-the most helpful. All the interfaces and the processor, including the boot-process, are
-described in there.
+In order to understand the way the board works the i.MX6SDL processor reference 
+manual is the most helpful. All the interfaces and the processor, including the 
+boot-process, are described in there.
 
 \subsection{Software Running on the RIoTboard}
 On the boards website the manufacturer - embest-tech - offers binary-images and
-instructions for running android or ubuntu, of which android is installed by default.
-Both operating systems rely on u-boot as the boot-loader. The source-code of those ports
-is available in moderately-hard-to-find repositories on the internet and the code itself
-may somehow be re-useable.
+instructions for running android or ubuntu, of which android is installed by 
+default.
+Both operating systems rely on u-boot as the boot-loader. The source-code of 
+those ports is available in moderately-hard-to-find repositories 
+\cite{git-uboot} on the internet and the code itself may somehow be re-useable.
 
-Due to their structure, the linux-code and the u-boot-fork were useful in different ways:
-u-boot requires the seperation of syscalls, the "flash-header" - which helped understand
-the way the i.MX6 boots - and linker script.
-So with u-boot-imx embest-tech provides three files for those and one giant source-file
-for all the rest.
+Due to their structure, the linux-code and the u-boot-fork were useful in 
+different ways:
+u-boot requires the seperation of syscalls, the "flash-header" - which helped 
+understand the way the i.MX6 boots - and linker script.
+So with u-boot-imx embest-tech provides three files for those and one giant 
+source-file for all the rest.
 The linux-port seems better structured but due our lack of knowledge about the
 kernel-nuild-process it was hard to use any parts of the source.
-Also, as far as initialisation goes, linux seems to repeat some of the steps that have
-already been done by u-boot and does some differently.
+Also, as far as initialisation goes, linux seems to repeat some of the steps 
+that have already been done by u-boot and does some differently.
 
-The focus on developers is somehow restricted to those two operating systems. There is no
-official support apart from discussions on a channel of an IoT/embedded-focused developer
-forum.
+The focus on developers is somehow restricted to those two operating systems. 
+There is no official support apart from discussions on a channel of an 
+IoT/embedded-focused developer forum \cite{forum}.
 
 \subsection{The Attempt of using u-boot}
 We really lost a lot of time on our attempt at basing the port on u-boot-code.
-During most of that time we did not produce anything that was really relevant because
-we had problems figuring out, how u-boot works during the build-process.
-After three weeks the instructors gave us the advice to look for an alternative and
-that even though we had not been able to run anything with it, the SDK looked more
-promising.
+During most of that time we did not produce anything that was really relevant 
+because we had problems figuring out, how u-boot works during the build-process.
+After three weeks the instructors gave us the advice to look for an alternative 
+and that even though we had not been able to run anything with it, the SDK 
+looked more promising.

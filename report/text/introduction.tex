@@ -1,5 +1,30 @@
 \section{Introduction}
+In early 2014, Freescale Semiconductors \cite{freescale-web} introduced a new 
+open-source single-board computer targeting the Internet of Things, the 
+RIoT-Board \cite{riot-web}. »RIoT« is an abbreviation for 
+»Revolutionizing the Internet of Things«, which the board targets.
+Compared to other boards typically used in IoT context, such as the TI MSP430 
+\cite{msp430} or the XMC 2Go \cite{xmc}, it is quite powerful and thus suitable 
+for applications requiring high levels of processing power.
 
-All the files we used while porting that are not used for building, such as documents,
-source code for working software, instructions and overviews, were gathered in a
-gitlab-repository on spline called "swp-report" the owner ist "backenklee".
+RIOT OS \cite{riot-os} on the other hand, using the same abbreviation in its 
+name, is an open-source operating system developed by Freie Universität Berlin 
+\cite{fu-web}, INRIA \cite{inria-web} and Hamburg University of Applied 
+Sciences \cite{haw-web}. It was designed for constrained devices often used in 
+IoT, providing partial POSIX compliance and realtime capabilities.
+
+The RIoTboard provides a lot more memory and computation power needed for RIOT 
+OS to run properly, but this is also what makes it interesting: With the 
+RIoTboard underneath, a whole new range of applications could run on RIOT OS, 
+e.g. central data processing in a sensor network or even graphical applications.
+
+This is why we decided to port RIOT OS to the RIoTboard as part of the 
+lab-course »Telematics-Project« \cite{course-web} at Freie Universität Berlin 
+during the summer term 2014.
+
+The following sections will provide more information how to port RIOT OS to new 
+platforms, planned milestones and our further proceedings.
+
+All the files we used while porting that are not used for building, such as 
+documents, source code for working software, instructions and overviews, were 
+gathered in an additional \texttt{git} repository \cite{git-report}.

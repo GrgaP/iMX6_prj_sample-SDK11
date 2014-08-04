@@ -1,0 +1,65 @@
+\begin{thebibliography}{10}
+
+\bibitem{freescale-web}
+{Freescale Website}.
+\newblock \texttt{\url{http://www.freescale.com}}.
+\newblock Last accessed May 5, 2014.
+
+\bibitem{riot-web}
+{RIoTboard Website}.
+\newblock \texttt{\url{http://www.riotboard.org}}.
+\newblock Last accessed May 1, 2014.
+
+\bibitem{msp430}
+{Texas Instruments MSP430 Microcontroller}.
+\newblock \texttt{\url{http://www.ti.com/lit/sg/slab034x/slab034x.pdf}}.
+\newblock Last accessed May 5, 2014.
+
+\bibitem{xmc}
+{XMC 2go}.
+\newblock \texttt{\url{http://www.keil.com/boards2/infineon/xmc2go}}.
+\newblock Last accessed May 5, 2014.
+
+\bibitem{riot-os}
+{RIOT OS Website}.
+\newblock \texttt{\url{http://www.riot-os.org}}.
+\newblock Last accessed May 5, 2014.
+
+\bibitem{fu-web}
+{Freie Universität Berlin Website}.
+\newblock \texttt{\url{http://www.fu-berlin.de}}.
+\newblock Last accessed May 5, 2014.
+
+\bibitem{inria-web}
+{INRIA Website}.
+\newblock \texttt{\url{http://www.inria.fr}}.
+\newblock Last accessed May 5, 2014.
+
+\bibitem{haw-web}
+{Hamburg University of Applied Sciences Website}.
+\newblock \texttt{\url{http://www.haw-hamburg.de/english.html}}.
+\newblock Last accessed May 5, 2014.
+
+\bibitem{course-web}
+{Telematics-Project Course Website}.
+\newblock
+  \texttt{\url{http://www.mi.fu-berlin.de/inf/groups/ag-tech/teaching/2014_SS/P_19517g_SWP_Telematik/index.html}}.
+\newblock Last accessed May 5, 2014.
+
+\bibitem{git-report}
+{Git Repository for this report and additional documents}.
+\newblock \texttt{\url{https://github.com/backenklee/swp-report}}.
+\newblock Last accessed August 4, 2014.
+
+\bibitem{git-uboot}
+{Git Repository for u-boot fork by embest-tech for i.MX6 platforms}.
+\newblock \texttt{\url{https://github.com/embest-tech/uboot-imx}}.
+\newblock Last accessed August 4, 2014.
+
+\bibitem{forum}
+{RIoTboard Forum}.
+\newblock
+  \texttt{\url{http://www.element14.com/community/community/designcenter/single-board-computers/riotboard/}}.
+\newblock Last accessed August 4, 2014.
+
+\end{thebibliography}
