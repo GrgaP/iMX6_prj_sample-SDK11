@@ -1,11 +1,19 @@
 TARGET?=report
 LATEX_BUILD_CMD=pdflatex -interaction=nonstopmode
 
-default: build
+.PHONY: trim clean ding
+
+ding: clean
+	$(MAKE) $(TARGET).pdf
+	$(MAKE) trim
+
+trim:
+	rm -f *.acn *.acr *.alg *.aux *.bbl *.blg *.dvi *.glg *.glo *.gls *.ist *.lof *.log *.lol *.lot *.out *.toc
 
 clean:
 	rm -f *.acn *.acr *.alg *.aux *.bbl *.blg *.dvi *.glg *.glo *.gls *.ist *.lof *.log *.lol *.lot *.out *.pdf *.toc
-build: 
+
+$(TARGET).pdf:
 	$(LATEX_BUILD_CMD) $(TARGET).tex
 	bibtex ${TARGET} || true
 	$(LATEX_BUILD_CMD) $(TARGET).tex
