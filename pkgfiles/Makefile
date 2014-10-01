@@ -6,10 +6,12 @@ DINGS= MX6SL\
 
 .PHONY: all clean
 
-all: $(patsubst %,$(CURDIR)/%.tar.bz2,$(DINGS))
+FILES=$(patsubst %,%.tar.bz2,$(DINGS))
 
-$(CURDIR)/%.tar.bz2: $(CURDIR)/%/
+all: $(FILES)
+
+%.tar.bz2: %/
 	tar -cf $@ $<
 
 clean::
-	rm $(patsubst %,$(CURDIR)/%.tar.bz2,$(DINGS))
+	rm $(FILES)
